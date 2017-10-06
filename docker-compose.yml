@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+  php:
+    image: php:7.1-fpm
+    volumes:
+      - ./src:/code
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "8007:80"
+    volumes:
+      - ./src:/code
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+    depends_on:
+      - php
